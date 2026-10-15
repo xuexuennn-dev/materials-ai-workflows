@@ -1,0 +1,32 @@
+{
+  "provenance": "AI-prepared summaries of the linked primary project descriptions and paper abstracts, checked 2026-10-15; not full-paper extraction",
+  "records": [
+    {"id": "matsciagent", "title": "Modular large language model agents for multi-task computational materials science", "year": 2026,
+     "url": "https://www.nature.com/articles/s43246-025-00994-x",
+     "code": "https://github.com/cakshat/MatSci-LLM-Agents",
+     "summary": "The framework connects language-model task routing with materials retrieval, continuum simulations, crystal generation and molecular dynamics. It demonstrates task-specific scientific tool integration.",
+     "scope": "A research framework, not evidence that a newly generated structure has been synthesized."},
+    {"id": "sparksmatter", "title": "Autonomous in-silico inorganic materials discovery via multi-agent physics-aware scientific reasoning", "year": 2026,
+     "url": "https://www.nature.com/articles/s41524-026-02205-8",
+     "code": "https://github.com/lamm-mit/SparksMatter",
+     "summary": "Scientific agents organize ideas, workflows, computational exploration and result review for inorganic materials design. The report includes limitations and further validation steps.",
+     "scope": "Computational candidates require appropriate calculation and experimental validation."},
+    {"id": "baybe", "title": "BayBE: a Bayesian Back End for experimental planning in the low-to-no-data regime", "year": 2025,
+     "url": "https://doi.org/10.1039/D5DD00050E",
+     "code": "https://github.com/emdgroup/baybe",
+     "summary": "Bayesian optimization supports experimental planning with numerical and categorical parameters, feasibility constraints and multiple targets. A campaign alternates recommendations and new measurements.",
+     "scope": "Recommendations are model-based decisions rather than measured improvements."},
+    {"id": "pymatgen", "title": "pymatgen materials analysis", "year": 2026,
+     "url": "https://github.com/materialsproject/pymatgen",
+     "summary": "Structure and composition objects, electronic-structure data, phase-diagram analysis and file interfaces support materials analysis and simulation workflows.",
+     "scope": "Computed data and supplied structures determine what can be concluded."},
+    {"id": "impedance", "title": "impedance.py electrochemical impedance analysis", "year": 2026,
+     "url": "https://impedancepy.readthedocs.io/en/latest/examples/fitting_example.html",
+     "summary": "Equivalent-circuit models fit complex impedance spectra and predict frequency-dependent responses. Fitted parameters and residuals support quantitative electrochemical data analysis.",
+     "scope": "A good fit alone does not establish a unique physical mechanism."},
+    {"id": "docling", "title": "Docling document processing", "year": 2026,
+     "url": "https://github.com/docling-project/docling",
+     "summary": "Document conversion preserves structured text, tables and reading order for downstream retrieval and scientific evidence extraction workflows.",
+     "scope": "Document conversion and citation-linked retrieval still require source checking."}
+  ]
+}

@@ -1,0 +1,8 @@
+pymatgen
+ase
+matminer
+impedance
+scikit-learn
+scipy
+numpy
+matplotlib
