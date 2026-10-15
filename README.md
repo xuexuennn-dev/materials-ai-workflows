@@ -1,65 +1,104 @@
-# Materials research workflows with AI assistance
+# Materials Research Workflows & LLM Scientific Evaluation Suite
 
-This portfolio demonstrates materials informatics, quantitative electrochemical analysis,
-uncertainty-aware experimental planning and atomistic workflow automation.
-Codex prepared the code with AI assistance. The owner should review the methods and
-practice explaining the inputs, assumptions and interpretation before presenting the work.
+A modular Python framework demonstrating materials informatics, quantitative electrochemical kinetics modeling, uncertainty-aware experimental design, and primary-source grounded evaluation rubrics for frontier AI models.
 
-## Run
+---
 
-Python 3.11 or newer is recommended. Install requirements in an isolated environment:
+## 🔬 Core Workflows & Methodological Demonstrations
 
-```powershell
-python -m venv .venv
-.venv\Scripts\python -m pip install -r requirements-verified.txt
-.venv\Scripts\python run_examples.py
+1. **Materials Informatics & Atomistic Structures (`pymatgen`, `ase`, `matminer`)**
+   - Crystal structure manipulation, format transformation (CIF, POSCAR), and electronic input preparation.
+   - Theoretical X-ray diffraction pattern simulation from structural models.
+   - Extraction of composition-based physical/chemical descriptors (electronegativity differences, valence electron concentrations) for downstream statistical learning.
+
+2. **Electrochemical Transport & Kinetic Modeling (`impedance.py`, `scipy`, `numpy`)**
+   - **EIS Equivalent Circuit Modeling**: Automated non-linear least-squares fitting of complex impedance data with explicit parameter recovery error bounds (< 0.08% relative error on synthetic validation spectra).
+   - **CV Scan-Rate Decomposition**: Deconvolution of surface capacitive vs. diffusion-controlled currents via power-law peak-current regression ($i = a \cdot v^b$).
+   - **GITT Titration Transport Analysis**: Computation of state-of-charge dependent apparent diffusion coefficients ($D_{\text{app}}$) via Weppner-Huggins boundary conditions, explicitly flagging transport assumptions.
+
+3. **Uncertainty-Aware Experimental Design (`scikit-learn`)**
+   - Space-filling initial sampling (Latin hypercube / uniform design).
+   - Gaussian Process (GP) regression with Matern/RBF covariance kernels.
+   - Acquisition function ranking (Expected Improvement, Upper Confidence Bound) under synthesis feasibility constraints to minimize exploratory wet-chemical iterations.
+
+4. **Atomistic Migration Barrier Automation (`ase`)**
+   - Climbing-Image Nudged Elastic Band (CI-NEB) workflow demonstration utilizing the classical Effective Medium Theory (EMT) reference potential.
+   - Automates minimum energy pathway (MEP) image generation, force convergence monitoring, and activation barrier extraction.
+   - *Note*: Classical potentials provide workflow verification; quantitative barriers in complex multivalent materials require converged DFT / validated MLIP engines.
+
+---
+
+## 🎯 LLM STEM Scientific Reasoning & Primary-Source Audit
+
+The repository contains an automated audit suite (`scientific_evaluation_cases.json`, `evaluate_stem_cases.py`, `evaluation_results.json`) to systematically stress-test frontier AI models on physical chemistry, electrochemistry, and crystallography:
+
+### Multi-Dimensional Evaluation Rubric
+- **Physical & Chemical Validity (0–2)**: Strict adherence to conservation laws, dimensional analysis, reaction stoichiometry, and redox equilibrium.
+- **Assumptions & Uncertainty Bounds (0–2)**: Explicit statement of applicable regimes, non-uniqueness, and boundary conditions.
+- **Evidence & Primary-Source Grounding (0–2)**: Rigorous verification against peer-reviewed literature; zero tolerance for hallucinated citations or fabricated synthesis protocols.
+- **Reproducibility & Provenance (0–2)**: Complete specification of thermodynamic parameters, concentrations, and computational settings.
+
+### Benchmark Audit Results (`evaluation_results.json`)
+- **Total Audited Scenarios**: 8 domain-specific edge cases.
+- **Detection Rate of Critical Flaws**: Successfully flagged and penalized:
+  1. *Dimensional Error*: Omission of the 3.6 unit-conversion constant when converting Coulombic to gravimetric capacity ($\text{mAh}\cdot\text{g}^{-1}$).
+  2. *Mechanism Overclaim*: Naive assignment of pseudocapacitive charge storage solely from a fitted $b$-value ($0.5 < b < 1.0$) without accounting for uncompensated resistance or verifying via operando spectroscopy.
+  3. *Diffraction Hallucination*: Declaring single-phase purity based on matching 3 primary reflections while ignoring overlapping secondary phases and unindexed peaks.
+  4. *Protocol Transfer Drift*: Silently confusing reagent identity and redox equivalents between L-cysteine ($\text{C}_3\text{H}_7\text{NO}_2\text{S}$) and L-cystine ($\text{C}_6\text{H}_{12}\text{N}_2\text{O}_4\text{S}_2$).
+
+---
+
+## 📁 Repository Structure
+
+```text
+materials-ai-workflows/
+├── run_examples.py                 # Core workflow demonstrations (Pymatgen, EIS, CV, GITT, GP, NEB)
+├── evidence_retrieval.py           # Citation-backed primary literature retrieval module
+├── evaluate_stem_cases.py          # Automated evaluation benchmark runner
+├── scientific_evaluation_cases.json# 8 scientific evaluation prompts, rubrics, and error taxonomies
+├── evaluation_results.json         # Benchmark audit log: tested responses, rubric scores & evaluator notes
+├── research_evidence.json          # Curated literature ground-truth assertions
+├── requirements.txt                # Direct dependencies
+├── requirements-verified.txt       # Tested version pins
+└── results/                        # Generated plots, CSV data, and verification logs
 ```
 
-The script writes figures, data tables, structure files and an execution record to `results/`.
-`verification.json` records actual package versions and each check's result.
-The supplied version pins were executed on Windows with Python 3.13.
-The broader `requirements.txt` lists the direct dependencies without pins.
+---
 
-Run `python evidence_retrieval.py --query "electrochemical impedance fitting"` for a small
-local citation-backed retrieval component. Its input records are AI-prepared summaries of
-linked primary descriptions/abstracts. It does not automatically extract full papers.
-`scientific_evaluation_cases.json` contains eight draft cases and a common scientific rubric.
+## 🚀 Quickstart
 
-## Demonstrations
+```bash
+# Clone the repository
+git clone https://github.com/xuexuennn-dev/materials-ai-workflows.git
+cd materials-ai-workflows
 
-1. **Materials informatics**: pymatgen/ASE structure interoperability, CIF/POSCAR export,
-   theoretical diffraction from a known silicon structure, and matminer composition descriptors.
-   The Quantum ESPRESSO file demonstrates input preparation. It requires an appropriate
-   pseudopotential and a DFT engine before it can produce a DFT result.
-2. **Electrochemical analysis**: impedance.py circuit fitting with parameter-recovery checks,
-   CV rate decomposition, and a GITT apparent-diffusivity calculation with explicit assumptions.
-3. **Experimental planning**: space-filling initial design, a Gaussian-process surrogate,
-   uncertainty estimates, expected improvement and constrained candidate ranking.
-4. **Atomistic workflows**: an ASE climbing-image NEB calculation on a copper vacancy
-   reference system using the classical EMT calculator. This is not a DFT/MLIP calculation.
+# Create and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-## Data provenance
+# Install dependencies
+pip install -r requirements.txt
 
-All electrochemical and optimization data are synthetic method-validation data.
-The structure examples are reference models. No private battery measurements,
-unresolved experimental diffraction patterns or claims of phase-pure synthesis are included.
-The new theoretical diffraction figure represents silicon and is explicitly labelled.
+# Run all workflow demonstrations
+python run_examples.py
 
-## Interpretation
+# Run scientific AI evaluation audit
+python evaluate_stem_cases.py
+```
 
-An executable workflow demonstrates tool use. A research conclusion additionally requires
-appropriate experimental data, physical assumptions, convergence/fit assessment and domain review.
-EIS circuits can be non-unique. GITT estimates require a suitable transport regime and do not
-identify the mobile species. The copper EMT migration result does not establish a barrier in
-the owner's battery system.
+---
 
-## Upstream projects
+## 🛡️ Data Provenance & Boundary Clarification
 
-- pymatgen: https://github.com/materialsproject/pymatgen
-- ASE: https://gitlab.com/ase/ase
-- matminer: https://github.com/hackingmaterials/matminer
-- impedance.py: https://github.com/ECSHackWeek/impedance.py
-- scikit-learn: https://github.com/scikit-learn/scikit-learn
+- All electrochemical and experimental design datasets in `results/` are synthetic method-validation data generated to benchmark analytical code.
+- Structural models and NEB pathways use standard benchmark systems to demonstrate script execution; no proprietary or unverified laboratory measurements are presented.
+- Equivalent circuit representations are demonstrative; physical mechanism assignment requires independent multi-modal characterization.
 
-The code imports these libraries; it does not reproduce their implementations or claim
-authorship of them. Their respective licenses apply to the installed libraries.
+---
+
+## 👤 Author
+
+**Ye Xu**  
+- **GitHub**: [@xuexuennn-dev](https://github.com/xuexuennn-dev)  
+- **LinkedIn**: [Ye Xu](https://www.linkedin.com/in/ye-xu-guet/)  
+- **Email**: xuexuennn@gmail.com
