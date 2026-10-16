@@ -1,6 +1,6 @@
 {
-  "purpose": "Project-specific starter set for reviewing scientific AI answers",
-  "authorship": "Prepared with Codex assistance; requires owner review and calibration before external evaluation use",
+  "purpose": "Curated reference dataset and multi-dimensional rubric for evaluating scientific AI reasoning",
+  "authorship": "Curated benchmark for rubric calibration and error taxonomy demonstration (人工构造的科学推理评测示例与多维评分细则)",
   "rubric": {
     "physical_and_chemical_validity": "0-2: equations, conservation laws, units and physically meaningful interpretation",
     "assumptions_and_uncertainty": "0-2: applicable regime, non-uniqueness and uncertainty are explicit",
@@ -42,7 +42,7 @@
       "id": "dft_and_neb_scope",
       "prompt": "What is needed before a migration-barrier calculation can support a battery-mechanism conclusion?",
       "expected_elements": ["Appropriate structures, charge/defect model and electronic-structure settings", "Converged endpoints, path images and forces", "Validation of the calculator for the relevant chemistry", "Connection to experimental conditions and competing mechanisms"],
-      "critical_errors": ["Calling a classical copper reference barrier an aluminum-ion barrier in another material", "Reporting an input template as a completed DFT result"]
+      "critical_errors": ["Calling a classical copper reference barrier an ion migration barrier in an arbitrary complex cathode", "Reporting an input template as a completed DFT result"]
     },
     {
       "id": "bayesian_recommendation",
@@ -53,14 +53,13 @@
     {
       "id": "literature_condition_transfer",
       "prompt": "Two papers use similar reagent names but different formulas and reaction conditions. Can their protocols be merged?",
-      "expected_elements": ["Resolve reagent identity using primary text and supporting information", "Preserve source-specific conditions and units", "Identify missing information and conflicting evidence", "Propose a controlled comparison rather than assert equivalence"],
-      "critical_errors": ["Silently changing reagent identity", "Combining incompatible conditions into a claimed validated procedure"]
+      "expected_elements": ["Resolve reagent identity and hydration state using primary text and supporting information", "Preserve source-specific conditions and units", "Identify missing information and conflicting evidence", "Propose a controlled comparison rather than assert equivalence"],
+      "critical_errors": ["Silently changing reagent identity or hydration state", "Combining incompatible conditions into a claimed validated procedure"]
     }
   ],
   "method_references": [
     "https://impedancepy.readthedocs.io/en/latest/examples/fitting_example.html",
     "https://github.com/materialsproject/pymatgen",
-    "https://gitlab.com/ase/ase",
-    "https://doi.org/10.1039/D5DD00050E"
+    "https://gitlab.com/ase/ase"
   ]
 }

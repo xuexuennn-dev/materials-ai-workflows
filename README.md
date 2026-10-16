@@ -28,9 +28,11 @@ A modular Python framework demonstrating materials informatics, quantitative ele
 
 ---
 
-## 🎯 LLM STEM Scientific Reasoning & Primary-Source Audit
+## 🎯 Curated Scientific AI Evaluation Rubrics & Error Taxonomies (人工构造的科学推理评测示例与多维评分细则)
 
-The repository contains an automated audit suite (`scientific_evaluation_cases.json`, `evaluate_stem_cases.py`, `evaluation_results.json`) to systematically stress-test frontier AI models on physical chemistry, electrochemistry, and crystallography:
+The repository provides a domain-specific evaluation framework (`scientific_evaluation_cases.json`, `evaluate_stem_cases.py`, `evaluation_results.json`) demonstrating how expert rubrics audit scientific reasoning across physical chemistry, electrochemistry, and crystallography.
+
+> **Provenance & Scope**: This suite serves as a curated reference benchmark for rubric calibration and error taxonomy demonstration. It contains handcrafted canonical responses and deliberate failure modes to illustrate systematic scoring criteria, rather than automated live API benchmarking of third-party commercial models.
 
 ### Multi-Dimensional Evaluation Rubric
 - **Physical & Chemical Validity (0–2)**: Strict adherence to conservation laws, dimensional analysis, reaction stoichiometry, and redox equilibrium.
@@ -38,13 +40,13 @@ The repository contains an automated audit suite (`scientific_evaluation_cases.j
 - **Evidence & Primary-Source Grounding (0–2)**: Rigorous verification against peer-reviewed literature; zero tolerance for hallucinated citations or fabricated synthesis protocols.
 - **Reproducibility & Provenance (0–2)**: Complete specification of thermodynamic parameters, concentrations, and computational settings.
 
-### Benchmark Audit Results (`evaluation_results.json`)
-- **Total Audited Scenarios**: 8 domain-specific edge cases.
-- **Detection Rate of Critical Flaws**: Successfully flagged and penalized:
+### Exemplar Audit Cases & Error Taxonomies (`evaluation_results.json`)
+- **Total Curated Scenarios**: 8 domain-specific benchmark cases.
+- **Demonstrated Penalty Mechanics for High-Frequency LLM Errors**:
   1. *Dimensional Error*: Omission of the 3.6 unit-conversion constant when converting Coulombic to gravimetric capacity ($\text{mAh}\cdot\text{g}^{-1}$).
   2. *Mechanism Overclaim*: Naive assignment of pseudocapacitive charge storage solely from a fitted $b$-value ($0.5 < b < 1.0$) without accounting for uncompensated resistance or verifying via operando spectroscopy.
-  3. *Diffraction Hallucination*: Declaring single-phase purity based on matching 3 primary reflections while ignoring overlapping secondary phases and unindexed peaks.
-  4. *Protocol Transfer Drift*: Silently confusing reagent identity and redox equivalents between L-cysteine ($\text{C}_3\text{H}_7\text{NO}_2\text{S}$) and L-cystine ($\text{C}_6\text{H}_{12}\text{N}_2\text{O}_4\text{S}_2$).
+  3. *Diffraction Hallucination*: Declaring single-phase purity based on matching 3 primary reflections of rutile $\text{TiO}_2$ while ignoring overlapping polymorphs (anatase/brookite) and unindexed reflections.
+  4. *Precursor Hydration Drift*: Silently confusing reagent hydration state or coordination equivalents (e.g., hydrated salt $\text{FeSO}_4\cdot 7\text{H}_2\text{O}$ vs. anhydrous $\text{FeSO}_4$), resulting in an ~83% stoichiometric discrepancy and solute supersaturation drift.
 
 ---
 

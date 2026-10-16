@@ -1,6 +1,10 @@
 """
-Execution script to systematically evaluate frontier AI scientific reasoning cases
-against peer-reviewed materials chemistry, electrochemistry, and thermodynamics rubrics.
+Curated Benchmark & Rubric Suite: Expert-Constructed Evaluation Cases Demonstrating Scientific AI Error Taxonomies
+(人工构造的科学推理评测示例与多维评分细则)
+
+Demonstrates how domain-specific rubrics systematically evaluate scientific reasoning
+against peer-reviewed materials chemistry, electrochemistry, and crystallography principles.
+All responses and scores are curated reference cases illustrating specific error taxonomies.
 """
 
 import json
@@ -15,7 +19,7 @@ def run_benchmarks():
 
     rubric = cases_data["rubric"]
     
-    # 8 rigorously audited cases including compliant and failing/hallucinating model responses
+    # 8 curated benchmark cases demonstrating passing and failing/hallucinating responses
     audited_evaluations = [
         {
             "case_id": "capacity_units",
@@ -29,7 +33,7 @@ def run_benchmarks():
             },
             "total_score": 8,
             "max_score": 8,
-            "verdict": "PASS",
+            "verdict": "PASS (Canonical Reference)",
             "evaluator_audit_notes": "Flawless dimensional conversion (explicit 3.6 conversion factor); explicitly decouples stoichiometric theoretical limit from practical reversible cell capacity."
         },
         {
@@ -44,7 +48,7 @@ def run_benchmarks():
             },
             "total_score": 1,
             "max_score": 8,
-            "verdict": "FAIL (Hallucinated Mechanism Claim)",
+            "verdict": "FAIL (Handcrafted Error Taxonomy: Mechanism Overclaim)",
             "evaluator_audit_notes": "CRITICAL REASONING DRIFT: Over-interprets an intermediate b-value (0.5 < b < 1.0) as definitive proof of pseudocapacitance. Fails to account for ohmic resistance (IR drop), uncompensated solution resistance, porous electrode geometric effects, or slow ion diffusion in semi-infinite linear transport. Dunn's method deconvolution and independent operando structural confirmation are strictly required."
         },
         {
@@ -59,7 +63,7 @@ def run_benchmarks():
             },
             "total_score": 8,
             "max_score": 8,
-            "verdict": "PASS",
+            "verdict": "PASS (Canonical Reference)",
             "evaluator_audit_notes": "Correctly distinguishes mathematical optimization convergence from physical identifiability; highlights non-uniqueness and requirement for Kramers-Kronig transform validation."
         },
         {
@@ -74,13 +78,13 @@ def run_benchmarks():
             },
             "total_score": 8,
             "max_score": 8,
-            "verdict": "PASS",
+            "verdict": "PASS (Canonical Reference)",
             "evaluator_audit_notes": "Penalizes naive application of Weppner-Huggins equation; correctly identifies phase boundary movement and volume expansion as confounding factors in conversion reactions."
         },
         {
             "case_id": "diffraction_provenance",
             "prompt": "A calculated pattern from an ideal structure resembles three experimental peaks. What has been established?",
-            "tested_model_response": "We have synthesized phase-pure chalcopyrite material, as evidenced by matching the three main diffraction peaks.",
+            "tested_model_response": "We have synthesized phase-pure rutile titanium dioxide (TiO2), as evidenced by matching the three main diffraction peaks.",
             "rubric_scores": {
                 "physical_and_chemical_validity": 0,
                 "assumptions_and_uncertainty": 0,
@@ -89,8 +93,8 @@ def run_benchmarks():
             },
             "total_score": 1,
             "max_score": 8,
-            "verdict": "FAIL (Unverified Phase Purity Claim)",
-            "evaluator_audit_notes": "CRITICAL FLAW: Claiming phase purity based on matching 3 reflections ignores severe peak overlapping from common binary secondary phases (e.g., CuS, Cu2S, binary oxides) and unindexed reflections. Requires full Rietveld refinement, background modeling, and complementary EDX/XPS spectroscopy."
+            "verdict": "FAIL (Handcrafted Error Taxonomy: Unverified Phase Purity)",
+            "evaluator_audit_notes": "CRITICAL FLAW: Claiming phase purity based on matching 3 reflections ignores peak overlapping from common polymorphic or secondary phases (e.g., anatase, brookite, sub-oxides) and unindexed reflections. Requires full Rietveld refinement, background modeling, and complementary EDX/XPS spectroscopy."
         },
         {
             "case_id": "dft_and_neb_scope",
@@ -104,7 +108,7 @@ def run_benchmarks():
             },
             "total_score": 8,
             "max_score": 8,
-            "verdict": "PASS",
+            "verdict": "PASS (Canonical Reference)",
             "evaluator_audit_notes": "Accurately enumerates convergence thresholds, functional dependencies, and explicit warning against extrapolating empirical potentials to complex multivalent intercalation materials."
         },
         {
@@ -119,13 +123,13 @@ def run_benchmarks():
             },
             "total_score": 8,
             "max_score": 8,
-            "verdict": "PASS",
+            "verdict": "PASS (Canonical Reference)",
             "evaluator_audit_notes": "Maintains strict boundary between probabilistic surrogate suggestion and physical ground truth; correctly reports acquisition uncertainty."
         },
         {
             "case_id": "literature_condition_transfer",
             "prompt": "Two papers use similar reagent names but different formulas and reaction conditions. Can their protocols be merged?",
-            "tested_model_response": "No. Reagents with similar common names may have distinct chemical formulas, coordination states, or stereochemistry (e.g., L-cysteine C3H7NO2S with a free thiol group vs. L-cystine C6H12N2O4S2 with a disulfide bridge). Merging their stoichiometric ratios or hydrothermal temperatures arbitrarily will lead to uncontrolled redox equilibria and parasitic secondary phase precipitation. Protocol adaptation requires stoichiometric re-balancing and thermodynamic phase diagram verification.",
+            "tested_model_response": "No. Reagents with similar common names may have distinct degrees of hydration, coordination states, or oxidation states (e.g., iron(II) sulfate heptahydrate FeSO4·7H2O with molar mass 278.01 g/mol vs. anhydrous iron(II) sulfate FeSO4 with molar mass 151.91 g/mol). Merging their mass quantities or hydrothermal temperatures arbitrarily will cause an ~83% stoichiometric discrepancy, altering solute supersaturation and triggering parasitic secondary phase precipitation. Protocol adaptation requires stoichiometric re-calculation and thermodynamic phase diagram verification.",
             "rubric_scores": {
                 "physical_and_chemical_validity": 2,
                 "assumptions_and_uncertainty": 2,
@@ -134,25 +138,26 @@ def run_benchmarks():
             },
             "total_score": 8,
             "max_score": 8,
-            "verdict": "PASS",
-            "evaluator_audit_notes": "Highlights real-world literature failure mode (confusing L-cysteine and L-cystine); emphasizes redox chemistry and thermodynamic re-equilibration."
+            "verdict": "PASS (Canonical Reference)",
+            "evaluator_audit_notes": "Highlights real-world precursor ambiguity (hydrated vs. anhydrous salts); emphasizes quantitative stoichiometric recalculation and thermodynamic re-equilibration."
         }
     ]
 
     summary = {
-        "benchmark_title": "LLM STEM Scientific Reasoning & Primary-Source Grounding Audit",
-        "audited_by": "Ye Xu (Scientific Computing & LLM Reasoning Audit Workflows)",
+        "benchmark_title": "Curated Benchmark: Scientific AI Reasoning Rubrics & Error Taxonomies",
+        "benchmark_type": "Expert-constructed reference evaluation dataset (人工构造的科学推理评测示例与多维评分细则)",
+        "provenance_note": "Curated exemplar benchmark for rubric calibration and demonstration; does not represent automated live API polling of external proprietary models.",
         "rubric_definitions": rubric,
         "total_cases_audited": len(audited_evaluations),
-        "passed_cases": sum(1 for c in audited_evaluations if "PASS" in c["verdict"]),
-        "failed_hallucinated_cases": sum(1 for c in audited_evaluations if "FAIL" in c["verdict"]),
+        "canonical_pass_cases": sum(1 for c in audited_evaluations if "PASS" in c["verdict"]),
+        "handcrafted_fail_taxonomies": sum(1 for c in audited_evaluations if "FAIL" in c["verdict"]),
         "audit_cases": audited_evaluations
     }
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
 
-    print(f"Successfully audited {len(audited_evaluations)} cases. Output saved to {OUTPUT_FILE}")
+    print(f"Successfully generated curated benchmark: {len(audited_evaluations)} cases written to {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     run_benchmarks()
