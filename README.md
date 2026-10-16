@@ -98,9 +98,7 @@ python evaluate_stem_cases.py
 
 ---
 
-## 👤 Author
+## 👤 Maintainer
 
-**Ye Xu**  
-- **GitHub**: [@xuexuennn-dev](https://github.com/xuexuennn-dev)  
-- **LinkedIn**: [Ye Xu](https://www.linkedin.com/in/ye-xu-guet/)  
-- **Email**: xuexuennn@gmail.com
+- **Maintainer**: [@xuexuennn-dev](https://github.com/xuexuennn-dev)
+- **License**: MIT
