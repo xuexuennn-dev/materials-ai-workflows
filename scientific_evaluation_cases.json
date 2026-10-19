@@ -1,0 +1,65 @@
+{
+  "purpose": "Curated reference dataset and multi-dimensional rubric for evaluating scientific AI reasoning",
+  "authorship": "Curated benchmark for rubric calibration and error taxonomy demonstration (人工构造的科学推理评测示例与多维评分细则)",
+  "rubric": {
+    "physical_and_chemical_validity": "0-2: equations, conservation laws, units and physically meaningful interpretation",
+    "assumptions_and_uncertainty": "0-2: applicable regime, non-uniqueness and uncertainty are explicit",
+    "evidence_grounding": "0-2: available evidence supports the claimed conclusion; citations are verifiable",
+    "reproducibility": "0-2: inputs, methods and output provenance are sufficient to reproduce the answer"
+  },
+  "cases": [
+    {
+      "id": "capacity_units",
+      "prompt": "Derive theoretical gravimetric capacity from electron count and molar mass. Explain every unit conversion.",
+      "expected_elements": ["Q = nF / (3.6M) in mAh/g when M is in g/mol", "Electron count belongs to a specified reaction", "Theoretical capacity is not measured capacity"],
+      "critical_errors": ["Missing factor 3.6", "Treating theoretical capacity as an experimental result"]
+    },
+    {
+      "id": "cv_mechanism",
+      "prompt": "An electrode has a CV power-law exponent between 0.5 and 1. Does that establish its ion-storage mechanism?",
+      "expected_elements": ["State the power-law model and fitted range", "Discuss mixed rate dependence", "Identify additional evidence needed for mechanism assignment"],
+      "critical_errors": ["Inferring a unique ion species or reaction mechanism from one fitted exponent"]
+    },
+    {
+      "id": "eis_identifiability",
+      "prompt": "An equivalent-circuit fit has a very low residual. Is the circuit therefore the unique physical model?",
+      "expected_elements": ["Distinguish numerical agreement from physical identifiability", "Inspect residuals and frequency coverage", "Compare plausible circuits and parameter uncertainty"],
+      "critical_errors": ["Calling the lowest fitting error proof of a unique mechanism"]
+    },
+    {
+      "id": "gitt_conversion_electrode",
+      "prompt": "Assess the use of a short-time GITT diffusion expression during a conversion reaction with changing phases.",
+      "expected_elements": ["Check pulse/rest response and the required transport regime", "Treat the fitted quantity as apparent and model dependent", "State the limitation introduced by changing phases and geometry"],
+      "critical_errors": ["Equating the apparent result with an intrinsic ion diffusion coefficient without checking assumptions"]
+    },
+    {
+      "id": "diffraction_provenance",
+      "prompt": "A calculated pattern from an ideal structure resembles three experimental peaks. What has been established?",
+      "expected_elements": ["Separate simulated and measured data", "Discuss overlapping phases and missing reflections", "Avoid claiming phase purity from limited overlap"],
+      "critical_errors": ["Presenting a simulated pattern as measurement", "Claiming pure-phase synthesis from a few overlaps"]
+    },
+    {
+      "id": "dft_and_neb_scope",
+      "prompt": "What is needed before a migration-barrier calculation can support a battery-mechanism conclusion?",
+      "expected_elements": ["Appropriate structures, charge/defect model and electronic-structure settings", "Converged endpoints, path images and forces", "Validation of the calculator for the relevant chemistry", "Connection to experimental conditions and competing mechanisms"],
+      "critical_errors": ["Calling a classical copper reference barrier an ion migration barrier in an arbitrary complex cathode", "Reporting an input template as a completed DFT result"]
+    },
+    {
+      "id": "bayesian_recommendation",
+      "prompt": "A Gaussian-process model ranks a new synthesis condition first. How should the result be reported?",
+      "expected_elements": ["Separate prediction from measurement", "Report uncertainty and acquisition criterion", "Respect feasibility constraints", "Update the model after obtaining real observations"],
+      "critical_errors": ["Reporting the predicted optimum as measured performance"]
+    },
+    {
+      "id": "literature_condition_transfer",
+      "prompt": "Two papers use similar reagent names but different formulas and reaction conditions. Can their protocols be merged?",
+      "expected_elements": ["Resolve reagent identity and hydration state using primary text and supporting information", "Preserve source-specific conditions and units", "Identify missing information and conflicting evidence", "Propose a controlled comparison rather than assert equivalence"],
+      "critical_errors": ["Silently changing reagent identity or hydration state", "Combining incompatible conditions into a claimed validated procedure"]
+    }
+  ],
+  "method_references": [
+    "https://impedancepy.readthedocs.io/en/latest/examples/fitting_example.html",
+    "https://github.com/materialsproject/pymatgen",
+    "https://gitlab.com/ase/ase"
+  ]
+}
